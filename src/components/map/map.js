@@ -10,11 +10,11 @@ class Map extends React.Component {
 
     this.state = {
       viewport: {
-        width: 400,
-        height: 400,
-        latitude: 37.7577,
-        longitude: -122.4376,
-        zoom: 8
+        width: 1280,
+        height: 720,
+        latitude: -42.0375277,
+        longitude: 173.6751879,
+        zoom: 5
       },
       popUpInfo: null
     };
