@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import ReactMapGL from 'react-map-gl';
+import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import PropTypes from 'prop-types';
+import { LocationPin, LocationInfo } from 'components';
 
-const Map = () => {
+const Map = ({ locations }) => {
+
   const [viewport, setViewport] = useState({
     width: 400,
     height: 400,
@@ -10,38 +13,33 @@ const Map = () => {
     zoom: 8
   });
 
-  //var csv is the CSV file with headers
-  const csvToJson = (csv) => {
-
-    let lines = csv.split("\n");
-
-    let result = [];
-
-    let headers = lines[0].split(",");
-
-    for (let i = 1; i < lines.length; i++) {
-
-      let obj = {};
-      let currentline = lines[i].split(",");
-
-      for (let j = 0; j < headers.length; j++) {
-        obj[headers[j]] = currentline[j];
-      }
-
-      result.push(obj);
-
+  const renderLocationMarker = (location, index) => {
+    if (location) {
+      return (
+        <Marker
+          key={`marker-${index}`}
+          longitude={location.longitude}
+          latitude={location.latitude}
+        >
+          <LocationPin size={20} name={location.name} />
+        </Marker>
+      );
     }
-
-    //return result; //JavaScript object
-    return JSON.stringify(result); //JSON
   }
 
   return ( 
-    <ReactMapGL {...viewport}
+    <ReactMapGL 
+      {...viewport}
       onViewportChange = {setViewport}
       mapboxApiAccessToken = {process.env.REACT_APP_MAPBOX_KEY}
-    />
+    >
+      {locations.map(renderLocationMarker)}
+    </ReactMapGL>
   );
 }
+// Ensure we have the props we need.
+Map.propTypes = {
+  locations: PropTypes.array.isRequired,
+};
 
 export default Map;
