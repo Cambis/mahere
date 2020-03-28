@@ -14,14 +14,14 @@ class App extends React.Component {
       filtered_data: [],
     }
 
-    this.getData = this.getData.bind(this);
+    this._getData = this._getData.bind(this);
   }
 
   componentWillMount() {
-    this.getCsvData();
+    this._getCsvData();
   }
 
-  fetchCsv() {
+  _fetchCsv() {
     return fetch('/gaz_names.csv').then(function (response) {
         let reader = response.body.getReader();
         let decoder = new TextDecoder('utf-8');
@@ -32,15 +32,15 @@ class App extends React.Component {
     });
   }
 
-  async getCsvData() {
-    let csvData = await this.fetchCsv();
+  async _getCsvData() {
+    let csvData = await this._fetchCsv();
 
     Papa.parse(csvData, {
-      complete: this.getData
+      complete: this._getData
     });
   }
 
-  getData(result) {
+  _getData(result) {
     let data = result.data;
     let validData = [];
 
