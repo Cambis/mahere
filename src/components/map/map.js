@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import PropTypes from 'prop-types';
 import { LocationPin, LocationInfo } from 'components';

@@ -1,9 +1,6 @@
 import React from 'react';
-import Papa from 'papaparse';
-import {
-  Map,
-  Pin
-} from 'components';
+import { readRemoteFile } from 'react-papaparse';
+import { Map } from 'components';
 import './app.css';
 
 class App extends React.Component {
@@ -24,23 +21,21 @@ class App extends React.Component {
     this._getCsvData();
   }
 
-  async _fetchCsv() {
-    return fetch('gaz_names.csv').then(function (response) {
-      let reader = response.body.getReader();
-      let decoder = new TextDecoder('utf-8');
+  // async _fetchCsv() {
+  //   return fetch('gaz_names.csv').then(function (response) {
+  //     let reader = response.body.getReader();
+  //     let decoder = new TextDecoder('utf-8');
 
-      return reader.read().then(function (result) {
-        return decoder.decode(result.value);
-      });
-    });
-  }
+  //     return reader.read().then(function (result) {
+  //       return decoder.decode(result.value);
+  //     });
+  //   });
+  // }
 
   async _getCsvData() {
-    let csvData = await this._fetchCsv();
-
-    Papa.parse(csvData, {
+    readRemoteFile('/gaz_names.csv', {
       complete: this._getData
-    });
+    })
   }
 
   _getData(result) {
@@ -65,7 +60,6 @@ class App extends React.Component {
   }
 
   render() {
-
     
     return (
       <>

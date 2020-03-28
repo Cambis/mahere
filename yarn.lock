@@ -8673,6 +8673,14 @@ react-map-gl@^5.2.3:
     react-virtualized-auto-sizer "^1.0.2"
     viewport-mercator-project "^6.2.3 || ^7.0.1"
 
+react-papaparse@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-papaparse/-/react-papaparse-3.0.0.tgz#e11aa4c87ebca8f510749f5c7470fd876813b9f3"
+  integrity sha512-EGVk5kKb8VNcbb/P+veCGIPiPVwgPkwFDQ0hT32mjdC90SuK+cqfg0fkeWB+t3S9DFEzGlv3HgEqnzTmTuG2lA==
+  dependencies:
+    papaparse "^5.1.1"
+    prop-types "^15.7.2"
+
 react-scripts@3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/react-scripts/-/react-scripts-3.4.1.tgz#f551298b5c71985cc491b9acf3c8e8c0ae3ada0a"
