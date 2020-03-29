@@ -15,12 +15,13 @@ export function getLocations() {
         type: types.LOAD,
       });
 
-      const response = await load();
+      const response = await load(parseData);
 
       dispatch({
         type: types.LOAD_SUCCESS,
-        payload: response.items,
+        payload: response,
       });
+
     } catch (e) {
       dispatch({
         type: types.LOAD_ERROR,
@@ -31,9 +32,42 @@ export function getLocations() {
   };
 }
 
+export function parseData(result) {
+  let data = result.data;
+  let validData = [];
+
+  if (data[18] === "Yes") {
+    let validItem = {
+      name: data[1],
+      longitude: Number(data[12]),
+      latitude: Number(data[11]),
+    }
+    validData.push(validItem);
+  }
+
+  console.log('foo');
+
+  return validData;
+
+  // return async dispatch => {
+  //   dispatch({
+  //     type: types.LOAD_SUCCESS,
+  //     payload: "validData",
+  //   });
+  // }
+}
+
+export function finish() {
+  return async dispatch => {
+    dispatch({
+      type: types.LOAD_COMPLETE,
+    });
+  }
+}
+
 /* Reducer defaults */
 const initialState = {
-  loading: false,
+  loading: true,
   error: null,
   items: [],
 };
