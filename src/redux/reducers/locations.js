@@ -4,6 +4,7 @@ import { readRemoteFile } from 'react-papaparse';
 export const types = {
   LOAD: 'locations/load/start',
   LOAD_SUCCESS: 'locations/load/success',
+  LOAD_FINISH: 'locations/load/finish',
   LOAD_ERROR: 'locations/load/error',
 };
 
@@ -26,7 +27,9 @@ export function getLocations() {
           }
         },
         complete: function() {
-          console.log("DONE");
+          dispatch({
+            type: types.LOAD_FINISH
+          });
         }
       });
 
@@ -76,7 +79,10 @@ export default function(state = initialState, action) {
       return { ...state, loading: true };
     }
     case types.LOAD_SUCCESS: {
-      return { ...state, loading: false, items: action.payload != null ? state.items.concat(action.payload) : state.items };
+      return { ...state, loading: true, items: action.payload != null ? state.items.concat(action.payload) : state.items };
+    }
+    case types.LOAD_FINISH: {
+      return { ...state, loading: false };
     }
     case types.LOAD_ERROR: {
       return { ...state, loading: false, error: action.payload };
