@@ -21,7 +21,7 @@ const App = () => {
           <div className="loading">Loading...</div>
         ) : (
           <div className="App" >
-            {/* <Map locations={locations}/>  */}
+            <Map locations={locations.items}/> 
           </div>
         )
       }

@@ -1,4 +1,4 @@
-import { load } from 'requests/internal/locations';
+import { readRemoteFile } from 'react-papaparse';
 
 /* Types */
 export const types = {
@@ -15,11 +15,16 @@ export function getLocations() {
         type: types.LOAD,
       });
 
-      const response = await load(parseData);
-
-      dispatch({
-        type: types.LOAD_SUCCESS,
-        payload: response,
+      readRemoteFile('gaz_names.csv', {
+        step: function(results) {
+          dispatch({
+            type: types.LOAD_SUCCESS,
+            payload: parseData(results),
+          });
+        },
+        complete: function() {
+          console.log("DONE");
+        }
       });
 
     } catch (e) {
@@ -45,16 +50,7 @@ export function parseData(result) {
     validData.push(validItem);
   }
 
-  console.log('foo');
-
   return validData;
-
-  // return async dispatch => {
-  //   dispatch({
-  //     type: types.LOAD_SUCCESS,
-  //     payload: "validData",
-  //   });
-  // }
 }
 
 export function finish() {
@@ -78,7 +74,7 @@ export default function(state = initialState, action) {
       return { ...state, loading: true };
     }
     case types.LOAD_SUCCESS: {
-      return { ...state, loading: false, items: action.payload };
+      return { ...state, loading: false, items: state.items.concat(action.payload) };
     }
     case types.LOAD_ERROR: {
       return { ...state, loading: false, error: action.payload };

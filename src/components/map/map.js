@@ -59,6 +59,9 @@ class Map extends React.Component {
   render() {
 
     const { viewport } = this.state;
+    const { locations } = this.props;
+
+    console.log(locations);
 
     return ( 
       <ReactMapGL 
@@ -66,7 +69,7 @@ class Map extends React.Component {
         onViewportChange = {this._updateViewport}
         mapboxApiAccessToken = {process.env.REACT_APP_MAPBOX_KEY}
       >
-        {this.props.locations.map(this._renderLocationMarker)}
+        {locations.size > 0 ? locations.map(this._renderLocationMarker) : ''}
 
         {this._renderPopup()}
 
@@ -76,7 +79,7 @@ class Map extends React.Component {
 }
 // Ensure we have the props we need.
 Map.propTypes = {
-  locations: PropTypes.array.isRequired,
+  locations: PropTypes.array,
 };
 
 export default Map;
