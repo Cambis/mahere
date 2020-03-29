@@ -16,11 +16,14 @@ export function getLocations() {
       });
 
       readRemoteFile('gaz_names.csv', {
-        step: function(results) {
-          dispatch({
-            type: types.LOAD_SUCCESS,
-            payload: parseData(results),
-          });
+        step: function(result) {
+          let location = parseData(result);
+          if (location) {
+            dispatch({
+              type: types.LOAD_SUCCESS,
+              payload: location,
+            });
+          }
         },
         complete: function() {
           console.log("DONE");
@@ -39,7 +42,6 @@ export function getLocations() {
 
 export function parseData(result) {
   let data = result.data;
-  let validData = [];
 
   if (data[18] === "Yes") {
     let validItem = {
@@ -47,10 +49,10 @@ export function parseData(result) {
       longitude: Number(data[12]),
       latitude: Number(data[11]),
     }
-    validData.push(validItem);
+    return validItem;
   }
 
-  return validData;
+  return null;
 }
 
 export function finish() {
@@ -74,7 +76,7 @@ export default function(state = initialState, action) {
       return { ...state, loading: true };
     }
     case types.LOAD_SUCCESS: {
-      return { ...state, loading: false, items: state.items.concat(action.payload) };
+      return { ...state, loading: false, items: action.payload != null ? state.items.concat(action.payload) : state.items };
     }
     case types.LOAD_ERROR: {
       return { ...state, loading: false, error: action.payload };

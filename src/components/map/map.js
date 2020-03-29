@@ -26,6 +26,7 @@ class Map extends React.Component {
 
   _renderLocationMarker = (location, index) => {
     if (location) {
+      // console.log(location.name);
       return (
         <Marker
           key={`marker-${index}`}
@@ -61,15 +62,13 @@ class Map extends React.Component {
     const { viewport } = this.state;
     const { locations } = this.props;
 
-    console.log(locations);
-
     return ( 
       <ReactMapGL 
         {...viewport}
         onViewportChange = {this._updateViewport}
         mapboxApiAccessToken = {process.env.REACT_APP_MAPBOX_KEY}
       >
-        {locations.size > 0 ? locations.map(this._renderLocationMarker) : ''}
+        {locations.map(this._renderLocationMarker)}
 
         {this._renderPopup()}
 
