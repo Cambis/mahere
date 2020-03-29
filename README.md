@@ -1,4 +1,12 @@
-# Mahere
+```sh     
+                 _                   
+ _ __ ___   __ _| |__   ___ _ __ ___ 
+| '_ ` _ \ / _` | '_ \ / _ \ '__/ _ \
+| | | | | | (_| | | | |  __/ | |  __/
+|_| |_| |_|\__,_|_| |_|\___|_|  \___|
+
+```
+
 Mahere is a project dedicated to mapping te reo placenames in Aotearoa.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
