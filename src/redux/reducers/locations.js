@@ -16,7 +16,7 @@ export function getLocations() {
         type: types.LOAD,
       });
 
-      readRemoteFile('gaz_names.csv', {
+      readRemoteFile('wairoa.csv', {
         step: function(result) {
           let location = parseData(result);
           if (location) {
@@ -46,13 +46,17 @@ export function getLocations() {
 export function parseData(result) {
   let data = result.data;
 
-  if (data[18] === "Yes") {
-    let validItem = {
-      name: data[1],
-      longitude: Number(data[12]),
-      latitude: Number(data[11]),
-    }
-    return validItem;
+  if (Number.isFinite(Number(data[9])) && Number.isFinite(Number(data[7]))) {
+    let item = {
+      name: data[0],
+      other_names: data[3],
+      translation: data[5],
+      latitude: Number(data[7]),
+      longitude: Number(data[9]),
+      description: data[11]
+    };
+
+    return item;
   }
 
   return null;
