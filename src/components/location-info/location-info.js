@@ -1,12 +1,15 @@
 import React from 'react';
+import './location-info.scss';
 
 const CityInfo = ({ info }) => {
   // console.log(info.name);
   return (
-    <div style={{ color: "#000" }} >
-      <h3>{info.name}</h3>
-      {info.other_names ? <p>({info.other_names})</p> : ''}
-      <p><i>{info.translation}</i></p>
+    <div className="location-info" style={{ color: "#000" }} >
+      <div className="location-info__names">
+        <div className="location-info__names--main">{info.name}</div>
+        {info.other_names ? <div className="location-info__names--other">({info.other_names})</div> : ''}
+      </div>
+      <p class="location-info__translation"><i>{info.translation}</i></p>
     </div>
   );
 }

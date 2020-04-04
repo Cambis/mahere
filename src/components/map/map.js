@@ -1,7 +1,7 @@
 import React from 'react';
-import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import ReactMapGL, { Marker } from 'react-map-gl';
 import PropTypes from 'prop-types';
-import { LocationPin, LocationInfo } from 'components';
+import { LocationPin, LocationInfo, LocationPopup } from 'components';
 
 class Map extends React.Component {
 
@@ -10,8 +10,8 @@ class Map extends React.Component {
 
     this.state = {
       viewport: {
-        width: 1280,
-        height: 720,
+        width: 1920,
+        height: 1080,
         latitude: -35.95670782454624,
         longitude: 173.9389632552626,
         zoom: 10.8,
@@ -65,14 +65,10 @@ class Map extends React.Component {
     const { popupInfo } = this.state;
 
     return popupInfo && (
-      <Popup tipSize={5}
-        anchor="top"
-        longitude={popupInfo.longitude}
-        latitude={popupInfo.latitude}
-        closeOnClick={false}
-        onClose={() => this.setState({ popupInfo: null })} >
-        <LocationInfo info={popupInfo} />
-      </Popup>
+      <LocationPopup 
+        info={popupInfo} 
+        onClose={() => this.setState({ popupInfo: null })}
+      />
     );
   }
 
