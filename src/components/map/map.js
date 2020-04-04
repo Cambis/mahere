@@ -12,16 +12,33 @@ class Map extends React.Component {
       viewport: {
         width: 1280,
         height: 720,
-        latitude: -42.0375277,
-        longitude: 173.6751879,
-        zoom: 5
+        latitude: -35.95670782454624,
+        longitude: 173.9389632552626,
+        zoom: 10.8,
       },
       popUpInfo: null
     };
   }
 
   _updateViewport = (viewport) => {
+    console.log(viewport);
+    const { minLat, maxLat, minLon, maxLon } = this.props;
+
+    if (viewport.longitude < minLon) {
+      viewport.longitude = minLon;
+    } else if (viewport.longitude > maxLon) {
+      viewport.longitude = maxLon;
+    } else if (viewport.latitude < minLat) {
+      viewport.latitude = minLat;
+    } else if (viewport.latitude > maxLat) {
+      viewport.latitude = maxLat;
+    }
+
     this.setState({ viewport });
+  }
+
+  _onClick = (event) => {
+    console.log(event.lngLat);
   }
 
   _renderLocationMarker = (location, index) => {
@@ -67,6 +84,7 @@ class Map extends React.Component {
         {...viewport}
         onViewportChange = {this._updateViewport}
         mapboxApiAccessToken = {process.env.REACT_APP_MAPBOX_KEY}
+        onClick = {this._onClick}
       >
         {locations.map(this._renderLocationMarker)}
 
@@ -78,7 +96,11 @@ class Map extends React.Component {
 }
 // Ensure we have the props we need.
 Map.propTypes = {
-  locations: PropTypes.array,
+  locations: PropTypes.array.isRequired,
+  minLat: PropTypes.number,
+  maxLat: PropTypes.number,
+  minLon: PropTypes.number,
+  maxLon: PropTypes.number,
 };
 
 export default Map;
