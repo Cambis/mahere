@@ -7,7 +7,7 @@
 
 ```
 
-Mahere is a project dedicated to mapping te reo placenames in Aotearoa.
+Mahere is a project dedicated to mapping te reo placenames in Aotearoa. Check out the project here: http://mahere.herokuapp.com/.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
