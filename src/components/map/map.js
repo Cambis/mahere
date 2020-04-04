@@ -52,7 +52,9 @@ class Map extends React.Component {
         >
           <LocationPin 
             size={20}
+            currentZoom={this.state.viewport.zoom}
             onClick={()=> this.setState({popupInfo: location})} 
+            name={location.name}
           />
         </Marker>
       );

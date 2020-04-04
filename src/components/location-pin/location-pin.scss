@@ -1,0 +1,15 @@
+.location-pin {
+  // display: flex;
+  // flex-direction: row;
+
+  // span {
+  //   padding-bottom: 20px;
+  // }
+
+  &__name {
+    position: absolute;
+    bottom: 25px;
+    left: 15px;
+    white-space: nowrap;
+  }
+}

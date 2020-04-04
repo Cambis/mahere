@@ -4,7 +4,9 @@ const CityInfo = ({ info }) => {
   // console.log(info.name);
   return (
     <div style={{ color: "#000" }} >
-      {info.name}
+      <h3>{info.name}</h3>
+      {info.other_names ? <p>({info.other_names})</p> : ''}
+      <p><i>{info.translation}</i></p>
     </div>
   );
 }
